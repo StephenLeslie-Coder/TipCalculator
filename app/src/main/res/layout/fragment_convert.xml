@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/background_tip"
+        android:background="@drawable/lime_background"
         android:gravity="center_horizontal">
         <androidx.cardview.widget.CardView
             android:layout_height="332dp"
@@ -53,6 +53,7 @@
                         android:inputType="number|numberDecimal"
                         android:layout_height="wrap_content"
                         android:hint="Amount due"
+                        android:backgroundTint="@color/colorPrimary"
                         />
                 </LinearLayout>
                 <TextView
@@ -84,12 +85,14 @@
                                 style="@style/Widget.MaterialComponents.Chip.Filter"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                app:chipBackgroundColor="@color/chip_status"
                                 android:text="5%" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip10"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                app:chipBackgroundColor="@color/chip_status"
                                 style="@style/Widget.MaterialComponents.Chip.Filter"
                                 android:text="10%" />
 
@@ -98,6 +101,7 @@
                                 style="@style/Widget.MaterialComponents.Chip.Filter"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                app:chipBackgroundColor="@color/chip_status"
                                 android:text="15%" />
 
                             <com.google.android.material.chip.Chip
@@ -105,12 +109,14 @@
                                 style="@style/Widget.MaterialComponents.Chip.Filter"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                app:chipBackgroundColor="@color/chip_status"
                                 android:text="20%" />
 
                             <com.google.android.material.chip.Chip
                                 android:id="@+id/chip25"
                                 style="@style/Widget.MaterialComponents.Chip.Filter"
                                 android:layout_width="wrap_content"
+                                app:chipBackgroundColor="@color/chip_status"
                                 android:layout_height="wrap_content"
                                 android:text="25%" />
                         </com.google.android.material.chip.ChipGroup>

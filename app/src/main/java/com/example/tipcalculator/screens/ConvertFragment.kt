@@ -1,5 +1,6 @@
 package com.example.tipcalculator.screens
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,6 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.graphics.toColor
+import androidx.core.graphics.toColorInt
+import androidx.core.view.get
 import androidx.lifecycle.ViewModelProvider
 import com.example.tipcalculator.R
 import com.example.tipcalculator.databinding.FragmentConvertBinding
@@ -34,15 +40,18 @@ class ConvertFragment : Fragment() {
         viewModel=ViewModelProvider(this).get(ConvertFragmentViewModel::class.java)
 
         binding.myChipGroup.setOnCheckedChangeListener { group, checkedId ->
-            Toast.makeText(activity,""+checkedId,Toast.LENGTH_SHORT).show()
+
             val tipText=when(checkedId){
 
                 R.id.chip25 -> "0.25"
+
                 R.id.chip20 -> "0.20"
                 R.id.chip15 -> "0.15"
                 R.id.chip10 -> "0.10"
                 else -> "0.05"
             }
+
+
 
             binding.tipMultiplierResult.text=tipText
             if(binding.amountEditText.text.toString()!="" && binding.amountEditText.text.toString()!=".") {
@@ -61,13 +70,15 @@ class ConvertFragment : Fragment() {
                 if (binding.amountEditText.text.toString()=="."){
                    return
                 }
-                binding.billResultTextView.text=""+p0
+               binding.billResultTextView.text="${p0}"
                 if(binding.amountEditText.length()>0  && binding.amountEditText.text.toString()!=".") {
+
                     splitBill()
                     calculateTip()
 
                 }else{
-                    binding.totalPerPersonResult.text="0.0"
+                    binding.totalPerPersonResult.text=getString(R.string.results,"0.0")
+                    binding.tipResult.text=getString(R.string.results,"0.0")
                 }
 
 
@@ -118,7 +129,8 @@ class ConvertFragment : Fragment() {
                 var split = binding.splitResult.text.toString().toInt()
                 var totalPerPerson: Double = amount / split
                 val answer: Double = Math.round(totalPerPerson * 10.0) / 10.0
-                binding.totalPerPersonResult.text = answer.toString()
+                val formatedBill=java.text.NumberFormat.getCurrencyInstance().format(answer)
+                binding.totalPerPersonResult.text = getString(R.string.results,formatedBill)
             }
             catch (e: Exception ){
                 return
@@ -135,7 +147,8 @@ class ConvertFragment : Fragment() {
                 val percentage = binding.tipMultiplierResult.text.toString().toDouble()
                 var tipResult = (bill * percentage)
                 val answer: Double = Math.round(tipResult * 10.0) / 10.0
-                binding.tipResult.text = answer.toString()
+                val formatedTip=java.text.NumberFormat.getCurrencyInstance().format(answer)
+                binding.tipResult.text = getString(R.string.results,formatedTip)
             }
             catch (e: Exception){
                 return
